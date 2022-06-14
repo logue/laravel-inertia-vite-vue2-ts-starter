@@ -44,10 +44,19 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
         },
       }),
     ],
+    resolve: {
+      alias: {
+        ziggy: path.resolve(__dirname, 'vendor/tightenco/ziggy/dist/vue'),
+      },
+    },
+    optimizeDeps: {
+      include: ['ziggy'],
+    },
     // Build Options
     // https://vitejs.dev/config/#build-options
     build: {
       rollupOptions: {
+        external: 'ziggy',
         output: {
           manualChunks: {
             // Split external library from transpiled code.

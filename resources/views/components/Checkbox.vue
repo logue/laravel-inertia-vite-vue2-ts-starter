@@ -1,0 +1,38 @@
+<template>
+  <input
+    type="checkbox"
+    :value="value"
+    v-model="proxyChecked"
+    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+  />
+</template>
+
+<script lang="ts">
+import { defineComponent, computed } from '@vue/composition-api';
+
+export default defineComponent({
+  props: {
+    checked: {
+      type: [Array, Boolean],
+      default: false,
+    },
+    value: {
+      default: undefined,
+    },
+  },
+  emits: ['update:checked'],
+  setup(props, context) {
+    const proxyChecked = computed({
+      get() {
+        return props.checked;
+      },
+
+      set(val) {
+        context.emit('update:checked', val);
+      },
+    });
+
+    return { proxyChecked };
+  },
+});
+</script>
