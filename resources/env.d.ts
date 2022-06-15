@@ -1,6 +1,8 @@
 /* eslint-disable */
 /// <reference types="vite/client" />
 
+import { Route } from 'ziggy-js';
+
 declare module '*.vue' {
   import Vue from 'vue';
   const component: ReturnType<typeof defineComponent>;
@@ -16,6 +18,8 @@ declare module 'vue/types/vue' {
     readonly $page: Page;
   }
 }
+
+declare type route = Route;
 
 declare module 'vue/types/options' {
   interface ComponentOptions<V extends Vue> {

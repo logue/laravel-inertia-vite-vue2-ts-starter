@@ -18,7 +18,10 @@ import {
 
 export default defineComponent({
   props: {
-    modelValue: { type: Object as PropType<HTMLInputElement>, required: true },
+    modelValue: {
+      type: Object as PropType<HTMLInputElement>,
+      default: undefined,
+    },
   },
   emits: ['update:modelValue'],
   setup() {

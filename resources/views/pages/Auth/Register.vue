@@ -84,7 +84,6 @@ import BreezeLabel from '@/views/components/Label.vue';
 import BreezeValidationErrors from '@/views/components/ValidationErrors.vue';
 import { Head, Link } from '@inertiajs/inertia-vue';
 import { useForm } from '@/scripts/vite/inertia-helper';
-import route from 'ziggy-js';
 
 export default defineComponent({
   components: {
@@ -117,7 +116,6 @@ export default defineComponent({
     return {
       form,
       submit,
-      route,
     };
   },
 });

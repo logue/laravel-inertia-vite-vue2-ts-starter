@@ -1,14 +1,10 @@
 <template>
   <div>
     <Head title="Welcome" />
-
     <div
       class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0"
     >
-      <div
-        v-if="canLogin"
-        class="hidden fixed top-0 right-0 px-6 py-4 sm:block"
-      >
+      <div v-if="canLogin" class="fixed top-0 right-0 px-6 py-4 sm:block">
         <Link
           v-if="page.props.auth.user"
           :href="route('dashboard')"
@@ -296,9 +292,8 @@
 <script lang="ts">
 import { Head, Link } from '@inertiajs/inertia-vue';
 import { defineComponent } from '@vue/composition-api';
-import { usePage } from '@/scripts/vite/inertia-helper';
+import { usePage, useInertia } from '@/scripts/vite/inertia-helper';
 import route from 'ziggy-js';
-
 export default defineComponent({
   components: {
     Head,
@@ -313,11 +308,14 @@ export default defineComponent({
   setup() {
     const page = usePage();
 
+    // const inertia = useInertia();
+
+    console.log(route('login'));
+
     console.log(page);
 
     return {
       page,
-      route,
     };
   },
 });

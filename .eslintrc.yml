@@ -54,3 +54,5 @@ settings:
         - .jsx
         - .tsx
         - .vue
+globals:
+  route: true

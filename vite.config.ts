@@ -5,7 +5,7 @@ import laravel from 'vite-plugin-laravel';
 import { visualizer } from 'rollup-plugin-visualizer';
 import inertia from './resources/scripts/vite/inertia-layout';
 import { createVuePlugin as vue } from 'vite-plugin-vue2';
-import checker from 'vite-plugin-checker';
+// import checker from 'vite-plugin-checker';
 import path from 'path';
 import fs from 'fs';
 
@@ -34,6 +34,7 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
       vue({
         target: 'esnext',
       }),
+      /*
       // vite-plugin-checker
       // https://github.com/fi3ework/vite-plugin-checker
       checker({
@@ -43,6 +44,7 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
           lintCommand: 'eslint', // for example, lint .ts & .tsx
         },
       }),
+      */
     ],
     resolve: {
       alias: {

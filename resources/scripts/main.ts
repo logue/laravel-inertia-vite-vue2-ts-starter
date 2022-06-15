@@ -3,15 +3,8 @@ import VueCompositionAPI, { createApp, h } from '@vue/composition-api';
 import { createInertiaApp } from '@inertiajs/inertia-vue';
 import { importPageComponent } from '@/scripts/vite/import-page-component';
 import { InertiaProgress } from '@inertiajs/progress';
-
 import { ZiggyVue } from 'ziggy-js/dist/vue';
 import { Ziggy } from '@/js/ziggy';
-
-Vue.use(VueCompositionAPI);
-Vue.config.productionTip = false;
-Vue.use(ZiggyVue, Ziggy);
-
-Vue.prototype.route = ZiggyVue;
 
 /** Application Name */
 const appName =
@@ -22,7 +15,12 @@ createInertiaApp({
   resolve: name =>
     importPageComponent(name, import.meta.glob('../views/pages/**/*.vue')),
   setup({ el, app, props, plugin }) {
-    console.log(props['data-page']);
+    // console.log(el, app, props, plugin);
+    // @ts-ignore
+    console.log(JSON.parse(el.dataset.page));
+    Vue.config.productionTip = false;
+    Vue.use(VueCompositionAPI);
+    Vue.use(ZiggyVue, Ziggy);
     Vue.use(plugin);
     const vueApp = createApp({ render: () => h(app, props) });
     vueApp.mount(el);
