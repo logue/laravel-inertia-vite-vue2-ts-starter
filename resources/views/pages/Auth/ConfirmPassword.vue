@@ -1,18 +1,18 @@
 <template>
-  <BreezeGuestLayout>
-    <Head title="Confirm Password" />
+  <breeze-guest-layout>
+    <intrtia-head title="Confirm Password" />
 
     <div class="mb-4 text-sm text-gray-600">
       This is a secure area of the application. Please confirm your password
       before continuing.
     </div>
 
-    <BreezeValidationErrors class="mb-4" />
+    <breeze-validation-errors class="mb-4" />
 
     <form @submit.prevent="submit">
       <div>
-        <BreezeLabel for="password" value="Password" />
-        <BreezeInput
+        <breeze-label for="password" value="Password" />
+        <breeze-input
           id="password"
           type="password"
           class="mt-1 block w-full"
@@ -24,16 +24,16 @@
       </div>
 
       <div class="flex justify-end mt-4">
-        <BreezeButton
+        <breeze-button
           class="ml-4"
           :class="{ 'opacity-25': form.processing }"
           :disabled="form.processing"
         >
           Confirm
-        </BreezeButton>
+        </breeze-button>
       </div>
     </form>
-  </BreezeGuestLayout>
+  </breeze-guest-layout>
 </template>
 
 <script lang="ts">
@@ -44,9 +44,8 @@ import BreezeGuestLayout from '@/views/layouts/Guest.vue';
 import BreezeInput from '@/views/components/Input.vue';
 import BreezeLabel from '@/views/components/Label.vue';
 import BreezeValidationErrors from '@/views/components/ValidationErrors.vue';
-import { Head } from '@inertiajs/inertia-vue';
-import { useForm } from '@/scripts/vite/inertia-helper';
-import route from 'ziggy-js';
+import { Head as InertiaHead } from '@inertiajs/inertia-vue';
+import { useInertia, route } from '@/views/plugins/inertia-helper';
 
 export default defineComponent({
   components: {
@@ -55,10 +54,13 @@ export default defineComponent({
     BreezeInput,
     BreezeLabel,
     BreezeValidationErrors,
-    Head,
+    InertiaHead,
   },
   setup() {
-    const form = useForm({
+    /** Get Inertia instance */
+    const inertia = useInertia();
+
+    const form = inertia.form({
       password: '',
     });
 

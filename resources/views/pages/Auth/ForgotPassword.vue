@@ -1,6 +1,6 @@
 <template>
-  <BreezeGuestLayout>
-    <Head title="Forgot Password" />
+  <breeze-guest-layout>
+    <inertia-head title="Forgot Password" />
 
     <div class="mb-4 text-sm text-gray-600">
       Forgot your password? No problem. Just let us know your email address and
@@ -12,12 +12,12 @@
       {{ status }}
     </div>
 
-    <BreezeValidationErrors class="mb-4" />
+    <breeze-validation-errors class="mb-4" />
 
     <form @submit.prevent="submit">
       <div>
-        <BreezeLabel for="email" value="Email" />
-        <BreezeInput
+        <breeze-label for="email" value="Email" />
+        <breeze-input
           id="email"
           type="email"
           class="mt-1 block w-full"
@@ -29,15 +29,15 @@
       </div>
 
       <div class="flex items-center justify-end mt-4">
-        <BreezeButton
+        <breeze-button
           :class="{ 'opacity-25': form.processing }"
           :disabled="form.processing"
         >
           Email Password Reset Link
-        </BreezeButton>
+        </breeze-button>
       </div>
     </form>
-  </BreezeGuestLayout>
+  </breeze-guest-layout>
 </template>
 
 <script lang="ts">
@@ -48,9 +48,8 @@ import BreezeGuestLayout from '@/views/layouts/Guest.vue';
 import BreezeInput from '@/views/components/Input.vue';
 import BreezeLabel from '@/views/components/Label.vue';
 import BreezeValidationErrors from '@/views/components/ValidationErrors.vue';
-import { Head } from '@inertiajs/inertia-vue';
-import { useForm } from '@/scripts/vite/inertia-helper';
-import route from 'ziggy-js';
+import { Head as InertiaHead, type InertiaForm } from '@inertiajs/inertia-vue';
+import { useInertia, route } from '@/views/plugins/inertia-helper';
 
 export default defineComponent({
   components: {
@@ -59,13 +58,16 @@ export default defineComponent({
     BreezeInput,
     BreezeLabel,
     BreezeValidationErrors,
-    Head,
+    InertiaHead,
   },
   props: {
     status: { type: String, default: undefined },
   },
   setup() {
-    const form = useForm({
+    /** Get Inertia instance */
+    const inertia = useInertia();
+
+    const form: InertiaForm<{ email: string }> = inertia.form({
       email: '',
     });
 

@@ -1,13 +1,13 @@
 <template>
-  <BreezeGuestLayout>
-    <Head title="Reset Password" />
+  <breeze-guest-layout>
+    <inertia-head title="Reset Password" />
 
-    <BreezeValidationErrors class="mb-4" />
+    <breeze-validation-errors class="mb-4" />
 
     <form @submit.prevent="submit">
       <div>
-        <BreezeLabel for="email" value="Email" />
-        <BreezeInput
+        <breeze-label for="email" value="Email" />
+        <breeze-input
           id="email"
           type="email"
           class="mt-1 block w-full"
@@ -19,8 +19,8 @@
       </div>
 
       <div class="mt-4">
-        <BreezeLabel for="password" value="Password" />
-        <BreezeInput
+        <breeze-label for="password" value="Password" />
+        <breeze-input
           id="password"
           type="password"
           class="mt-1 block w-full"
@@ -31,8 +31,8 @@
       </div>
 
       <div class="mt-4">
-        <BreezeLabel for="password_confirmation" value="Confirm Password" />
-        <BreezeInput
+        <breeze-label for="password_confirmation" value="Confirm Password" />
+        <breeze-input
           id="password_confirmation"
           type="password"
           class="mt-1 block w-full"
@@ -43,15 +43,15 @@
       </div>
 
       <div class="flex items-center justify-end mt-4">
-        <BreezeButton
+        <breeze-button
           :class="{ 'opacity-25': form.processing }"
           :disabled="form.processing"
         >
           Reset Password
-        </BreezeButton>
+        </breeze-button>
       </div>
     </form>
-  </BreezeGuestLayout>
+  </breeze-guest-layout>
 </template>
 
 <script lang="ts">
@@ -62,8 +62,8 @@ import BreezeGuestLayout from '@/views/layouts/Guest.vue';
 import BreezeInput from '@/views/components/Input.vue';
 import BreezeLabel from '@/views/components/Label.vue';
 import BreezeValidationErrors from '@/views/components/ValidationErrors.vue';
-import { Head } from '@inertiajs/inertia-vue';
-import { useForm } from '@/scripts/vite/inertia-helper';
+import { Head as InertiaHead, type InertiaForm } from '@inertiajs/inertia-vue';
+import { useInertia, route } from '@/views/plugins/inertia-helper';
 
 export default defineComponent({
   components: {
@@ -72,14 +72,22 @@ export default defineComponent({
     BreezeInput,
     BreezeLabel,
     BreezeValidationErrors,
-    Head,
+    InertiaHead,
   },
   props: {
     email: { type: String, default: undefined },
     token: { type: String, default: undefined },
   },
   setup(props) {
-    const form = useForm({
+    /** Get Inertia instance */
+    const inertia = useInertia();
+
+    const form: InertiaForm<{
+      token: string;
+      email: string;
+      password: string;
+      password_confirmation: string;
+    }> = inertia.form({
       token: props.token,
       email: props.email,
       password: '',

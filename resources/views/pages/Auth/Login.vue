@@ -1,8 +1,8 @@
 <template>
-  <BreezeGuestLayout>
-    <Head title="Log in" />
+  <breeze-guest-layout>
+    <inertia-head title="Log in" />
 
-    <BreezeValidationErrors class="mb-4" />
+    <breeze-validation-errors class="mb-4" />
 
     <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
       {{ status }}
@@ -10,8 +10,8 @@
 
     <form @submit.prevent="submit">
       <div>
-        <BreezeLabel for="email" value="Email" />
-        <BreezeInput
+        <breeze-label for="email" value="Email" />
+        <breeze-input
           id="email"
           type="email"
           class="mt-1 block w-full"
@@ -23,8 +23,8 @@
       </div>
 
       <div class="mt-4">
-        <BreezeLabel for="password" value="Password" />
-        <BreezeInput
+        <breeze-label for="password" value="Password" />
+        <breeze-input
           id="password"
           type="password"
           class="mt-1 block w-full"
@@ -36,30 +36,30 @@
 
       <div class="block mt-4">
         <label class="flex items-center">
-          <BreezeCheckbox name="remember" v-model:checked="form.remember" />
+          <breeze-checkbox name="remember" v-model:checked="form.remember" />
           <span class="ml-2 text-sm text-gray-600">Remember me</span>
         </label>
       </div>
 
       <div class="flex items-center justify-end mt-4">
-        <Link
+        <inertia-link
           v-if="canResetPassword"
           :href="route('password.request')"
           class="underline text-sm text-gray-600 hover:text-gray-900"
         >
           Forgot your password?
-        </Link>
+        </inertia-link>
 
-        <BreezeButton
+        <breeze-button
           class="ml-4"
           :class="{ 'opacity-25': form.processing }"
           :disabled="form.processing"
         >
           Log in
-        </BreezeButton>
+        </breeze-button>
       </div>
     </form>
-  </BreezeGuestLayout>
+  </breeze-guest-layout>
 </template>
 
 <script lang="ts">
@@ -71,8 +71,12 @@ import BreezeGuestLayout from '@/views/layouts/Guest.vue';
 import BreezeInput from '@/views/components/Input.vue';
 import BreezeLabel from '@/views/components/Label.vue';
 import BreezeValidationErrors from '@/views/components/ValidationErrors.vue';
-import { Head, Link } from '@inertiajs/inertia-vue';
-import { useForm } from '@/scripts/vite/inertia-helper';
+import {
+  Head as InertiaHead,
+  Link as InertiaLink,
+  type InertiaForm,
+} from '@inertiajs/inertia-vue';
+import { useInertia, route } from '@/views/plugins/inertia-helper';
 
 export default defineComponent({
   components: {
@@ -82,15 +86,22 @@ export default defineComponent({
     BreezeInput,
     BreezeLabel,
     BreezeValidationErrors,
-    Head,
-    Link,
+    InertiaHead,
+    InertiaLink,
   },
   props: {
     canResetPassword: Boolean,
     status: String,
   },
   setup() {
-    const form = useForm({
+    /** Get Inertia instance */
+    const inertia = useInertia();
+
+    const form: InertiaForm<{
+      email: string;
+      password: string;
+      remember: boolean;
+    }> = inertia.form({
       email: '',
       password: '',
       remember: false,

@@ -1,30 +1,33 @@
 <template>
   <div>
-    <Head title="Welcome" />
+    <inertia-head title="Welcome" />
     <div
       class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0"
     >
       <div v-if="canLogin" class="fixed top-0 right-0 px-6 py-4 sm:block">
-        <Link
+        <inertia-link
           v-if="page.props.auth.user"
           :href="route('dashboard')"
           class="text-sm text-gray-700 underline"
         >
           Dashboard
-        </Link>
+        </inertia-link>
 
         <template v-else>
-          <Link :href="route('login')" class="text-sm text-gray-700 underline">
+          <inertia-link
+            :href="route('login')"
+            class="text-sm text-gray-700 underline"
+          >
             Log in
-          </Link>
+          </inertia-link>
 
-          <Link
+          <inertia-link
             v-if="canRegister"
             :href="route('register')"
             class="ml-4 text-sm text-gray-700 underline"
           >
             Register
-          </Link>
+          </inertia-link>
         </template>
       </div>
 
@@ -290,14 +293,18 @@
 </template>
 
 <script lang="ts">
-import { Head, Link } from '@inertiajs/inertia-vue';
 import { defineComponent } from '@vue/composition-api';
-import { usePage, useInertia } from '@/scripts/vite/inertia-helper';
-import route from 'ziggy-js';
+import { usePage } from '@/views/plugins/inertia-helper';
+
+import {
+  Head as InertiaHead,
+  Link as InertiaLink,
+} from '@inertiajs/inertia-vue';
+
 export default defineComponent({
   components: {
-    Head,
-    Link,
+    InertiaHead,
+    InertiaLink,
   },
   props: {
     canLogin: { type: Boolean, default: undefined },
@@ -309,10 +316,6 @@ export default defineComponent({
     const page = usePage();
 
     // const inertia = useInertia();
-
-    console.log(route('login'));
-
-    console.log(page);
 
     return {
       page,

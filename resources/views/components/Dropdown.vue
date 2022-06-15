@@ -36,10 +36,12 @@
 <script lang="ts">
 import {
   computed,
+  defineComponent,
   onMounted,
   onUnmounted,
   ref,
-  defineComponent,
+  type ComputedRef,
+  type Ref,
 } from '@vue/composition-api';
 
 export default defineComponent({
@@ -52,15 +54,15 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const open = ref(false);
+    const open: Ref<boolean> = ref(false);
 
-    const widthClass = computed(() => {
+    const widthClass: ComputedRef<string | undefined> = computed(() => {
       return {
         '48': 'w-48',
       }[props.width.toString()];
     });
 
-    const alignmentClasses = computed(() => {
+    const alignmentClasses: ComputedRef<string> = computed(() => {
       if (props.align === 'left') {
         return 'origin-top-left left-0';
       } else if (props.align === 'right') {

@@ -16,6 +16,7 @@ declare module 'vue/types/vue' {
   interface Vue {
     readonly $inertia: Inertia;
     readonly $page: Page;
+    readonly route;
   }
 }
 

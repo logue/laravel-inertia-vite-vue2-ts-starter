@@ -1,10 +1,8 @@
-import { getCurrentInstance, toRaw } from '@vue/composition-api';
-import form from '@inertiajs/inertia-vue/src/form';
+import { getCurrentInstance } from '@vue/composition-api';
 
 import type { Page } from '@inertiajs/inertia';
 import type { Router } from '@inertiajs/inertia/types/router';
 import type {
-  InertiaForm,
   InertiaFormTrait,
   InertiaHeadManager,
 } from '@inertiajs/inertia-vue';
@@ -28,7 +26,7 @@ export function usePage(): Page<any> {
     throw new Error(`Should be used in setup().`);
   }
   // @ts-ignore
-  return toRaw(instance.proxy.$page);
+  return instance.proxy.$page;
 }
 
 /** Get inertia instance (For Composition api) */
@@ -42,7 +40,16 @@ export function useInertia(): Router & InertiaFormTrait {
   return instance.proxy.$inertia;
 }
 
-/** Get form instance (For Composition api) */
-export function useForm(...args): InertiaForm<any> {
-  return form(args);
+/** Get route instance (For Composition api) */
+export function route(...args) {
+  /** Get Instance */
+  const instance = getCurrentInstance();
+
+  if (!instance) {
+    // @ts-ignore
+    return window.route(args);
+    // throw new Error(`Should be used in setup().`);
+  }
+
+  return instance.proxy.route(args);
 }

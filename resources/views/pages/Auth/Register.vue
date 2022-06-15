@@ -82,8 +82,12 @@ import BreezeGuestLayout from '@/views/layouts/Guest.vue';
 import BreezeInput from '@/views/components/Input.vue';
 import BreezeLabel from '@/views/components/Label.vue';
 import BreezeValidationErrors from '@/views/components/ValidationErrors.vue';
-import { Head, Link } from '@inertiajs/inertia-vue';
-import { useForm } from '@/scripts/vite/inertia-helper';
+import {
+  Head as InertiaHead,
+  Link as InertiaLink,
+  type InertiaForm,
+} from '@inertiajs/inertia-vue';
+import { useInertia, route } from '@/views/plugins/inertia-helper';
 
 export default defineComponent({
   components: {
@@ -92,14 +96,23 @@ export default defineComponent({
     BreezeInput,
     BreezeLabel,
     BreezeValidationErrors,
-    Head,
-    Link,
+    InertiaHead,
+    InertiaLink,
   },
   props: {
     status: { type: String, default: undefined },
   },
   setup() {
-    const form = useForm({
+    /** Get Inertia instance */
+    const inertia = useInertia();
+
+    const form: InertiaForm<{
+      name: string;
+      email: string;
+      password: string;
+      password_confirmation: string;
+      terms: boolean;
+    }> = inertia.form({
       name: '',
       email: '',
       password: '',
