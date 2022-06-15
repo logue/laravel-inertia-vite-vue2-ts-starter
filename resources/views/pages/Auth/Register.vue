@@ -1,13 +1,13 @@
 <template>
-  <BreezeGuestLayout>
-    <Head title="Register" />
+  <breeze-guest-layout>
+    <inertia-head title="Register" />
 
-    <BreezeValidationErrors class="mb-4" />
+    <breeze-validation-errors class="mb-4" />
 
     <form @submit.prevent="submit">
       <div>
-        <BreezeLabel for="name" value="Name" />
-        <BreezeInput
+        <breeze-label for="name" value="Name" />
+        <breeze-input
           id="name"
           type="text"
           class="mt-1 block w-full"
@@ -19,8 +19,8 @@
       </div>
 
       <div class="mt-4">
-        <BreezeLabel for="email" value="Email" />
-        <BreezeInput
+        <breeze-label for="email" value="Email" />
+        <breeze-input
           id="email"
           type="email"
           class="mt-1 block w-full"
@@ -31,8 +31,8 @@
       </div>
 
       <div class="mt-4">
-        <BreezeLabel for="password" value="Password" />
-        <BreezeInput
+        <breeze-label for="password" value="Password" />
+        <breeze-input
           id="password"
           type="password"
           class="mt-1 block w-full"
@@ -43,8 +43,8 @@
       </div>
 
       <div class="mt-4">
-        <BreezeLabel for="password_confirmation" value="Confirm Password" />
-        <BreezeInput
+        <breeze-label for="password_confirmation" value="Confirm Password" />
+        <breeze-input
           id="password_confirmation"
           type="password"
           class="mt-1 block w-full"
@@ -55,27 +55,27 @@
       </div>
 
       <div class="flex items-center justify-end mt-4">
-        <Link
+        <inertia-link
           :href="route('login')"
           class="underline text-sm text-gray-600 hover:text-gray-900"
         >
           Already registered?
-        </Link>
+        </inertia-link>
 
-        <BreezeButton
+        <breeze-button
           class="ml-4"
           :class="{ 'opacity-25': form.processing }"
           :disabled="form.processing"
         >
           Register
-        </BreezeButton>
+        </breeze-button>
       </div>
     </form>
-  </BreezeGuestLayout>
+  </breeze-guest-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent, ref, type Ref } from '@vue/composition-api';
 
 import BreezeButton from '@/views/components/Button.vue';
 import BreezeGuestLayout from '@/views/layouts/Guest.vue';
@@ -85,7 +85,6 @@ import BreezeValidationErrors from '@/views/components/ValidationErrors.vue';
 import {
   Head as InertiaHead,
   Link as InertiaLink,
-  type InertiaForm,
 } from '@inertiajs/inertia-vue';
 import { useInertia, route } from '@/views/plugins/inertia-helper';
 
@@ -106,13 +105,14 @@ export default defineComponent({
     /** Get Inertia instance */
     const inertia = useInertia();
 
-    const form: InertiaForm<{
+    const form: Ref<{
       name: string;
       email: string;
       password: string;
       password_confirmation: string;
       terms: boolean;
-    }> = inertia.form({
+      processing?: boolean;
+    }> = ref({
       name: '',
       email: '',
       password: '',
@@ -121,8 +121,12 @@ export default defineComponent({
     });
 
     const submit = () => {
-      form.post(route('register'), {
-        onFinish: () => form.reset('password', 'password_confirmation'),
+      // console.log(form.value);
+      inertia.post(route('register'), form.value, {
+        onFinish: () => {
+          form.value.password = '';
+          form.value.password_confirmation = '';
+        },
       });
     };
 

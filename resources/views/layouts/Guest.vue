@@ -3,9 +3,9 @@
     class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100"
   >
     <div>
-      <Link href="/">
-        <BreezeApplicationLogo class="w-20 h-20 fill-current text-gray-500" />
-      </Link>
+      <inertia-link href="/">
+        <breeze-application-logo class="w-20 h-20 fill-current text-gray-500" />
+      </inertia-link>
     </div>
 
     <div
@@ -20,12 +20,12 @@
 import { defineComponent } from '@vue/composition-api';
 
 import BreezeApplicationLogo from '@/views/components/ApplicationLogo.vue';
-import { Link } from '@inertiajs/inertia-vue';
+import { Link as InertiaLink } from '@inertiajs/inertia-vue';
 
 export default defineComponent({
   components: {
     BreezeApplicationLogo,
-    Link,
+    InertiaLink,
   },
 });
 </script>

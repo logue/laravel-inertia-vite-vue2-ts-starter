@@ -2,7 +2,7 @@
   <input
     class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
     :value="modelValue"
-    @input="$emit('update:modelValue', $event.target.value)"
+    @input="onInput"
     ref="input"
   />
 </template>
@@ -12,19 +12,31 @@ import {
   defineComponent,
   onMounted,
   ref,
-  type PropType,
   type Ref,
 } from '@vue/composition-api';
 
 export default defineComponent({
+  /** Model Definition */
+  model: {
+    prop: 'modelValue',
+    event: 'update:modelValue',
+  },
+  /** Props Definition */
   props: {
     modelValue: {
-      type: Object as PropType<HTMLInputElement>,
-      default: undefined,
+      type: String,
+      default: 'text',
     },
   },
+  /** Emits */
   emits: ['update:modelValue'],
-  setup() {
+  /**
+   * Setup
+   *
+   * @param _props  - Props
+   * @param context - Context
+   */
+  setup(_props, context) {
     const input: Ref<HTMLInputElement | undefined> = ref();
 
     onMounted(() => {
@@ -32,8 +44,13 @@ export default defineComponent({
         input.value.focus();
       }
     });
+
+    const onInput = (e: InputEvent) =>
+      context.emit('update:modelValue', (e.target as HTMLInputElement).value);
+
     return {
       input,
+      onInput,
     };
   },
 });

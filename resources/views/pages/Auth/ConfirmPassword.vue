@@ -1,6 +1,6 @@
 <template>
   <breeze-guest-layout>
-    <intrtia-head title="Confirm Password" />
+    <inertia-head title="Confirm Password" />
 
     <div class="mb-4 text-sm text-gray-600">
       This is a secure area of the application. Please confirm your password

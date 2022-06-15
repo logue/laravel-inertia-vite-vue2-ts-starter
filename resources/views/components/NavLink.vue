@@ -1,7 +1,7 @@
 <template>
-  <Link :href="href" :class="classes">
+  <inertia-link :href="href" :class="classes">
     <slot />
-  </Link>
+  </inertia-link>
 </template>
 
 <script lang="ts">
@@ -10,11 +10,11 @@ import {
   defineComponent,
   type ComputedRef,
 } from '@vue/composition-api';
-import { Link } from '@inertiajs/inertia-vue';
+import { Link as InertiaLink } from '@inertiajs/inertia-vue';
 
 export default defineComponent({
   components: {
-    Link,
+    InertiaLink,
   },
   props: {
     href: { type: String, default: undefined },
