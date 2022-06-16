@@ -9,19 +9,24 @@
 </template>
 
 <script lang="ts">
-import { usePage } from '@/views/plugins/inertia-helper';
 import {
   computed,
   defineComponent,
   type ComputedRef,
 } from '@vue/composition-api';
+import { usePage } from '@/views/plugins/inertia-helper';
 
 export default defineComponent({
+  /**
+   * Setup
+   */
   setup() {
+    /** Error Messages */
     const errors: ComputedRef<string[]> = computed(
       () => usePage().props.errors
     );
 
+    /** Display error messages flag */
     const hasErrors: ComputedRef<boolean> = computed(
       () => Object.keys(errors.value).length > 0
     );

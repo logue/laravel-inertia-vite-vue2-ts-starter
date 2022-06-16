@@ -45,9 +45,11 @@ import BreezeInput from '@/views/components/Input.vue';
 import BreezeLabel from '@/views/components/Label.vue';
 import BreezeValidationErrors from '@/views/components/ValidationErrors.vue';
 import { Head as InertiaHead } from '@inertiajs/inertia-vue';
+
 import { useInertia, route } from '@/views/plugins/inertia-helper';
 
 export default defineComponent({
+  /** Using Components */
   components: {
     BreezeButton,
     BreezeGuestLayout,
@@ -56,6 +58,9 @@ export default defineComponent({
     BreezeValidationErrors,
     InertiaHead,
   },
+  /**
+   * Setup
+   */
   setup() {
     /** Get Inertia instance */
     const inertia = useInertia();

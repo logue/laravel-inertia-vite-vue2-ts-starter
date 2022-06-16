@@ -8,22 +8,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, Ref, PropType } from '@vue/composition-api';
+import {
+  defineComponent,
+  computed,
+  type Ref,
+  type SetupContext,
+} from '@vue/composition-api';
 
 export default defineComponent({
+  /** Props Definition */
   props: {
     checked: {
-      type: Array as PropType<boolean[] | boolean>,
+      type: Boolean,
       default: false,
     },
     value: {
-      type: Array as PropType<boolean[] | boolean>,
+      type: Boolean,
       default: false,
     },
   },
+  /** Emits */
   emits: ['update:checked'],
-  setup(props, context) {
-    const proxyChecked: Ref<boolean | boolean[]> = computed({
+  /**
+   * Setup
+   * @param props - Props
+   * @param context - Setup Context
+   */
+  setup(props, context: SetupContext) {
+    const proxyChecked: Ref<boolean> = computed({
       get: () => props.checked,
       set: val => context.emit('update:checked', val),
     });

@@ -6,6 +6,7 @@ import type {
   InertiaFormTrait,
   InertiaHeadManager,
 } from '@inertiajs/inertia-vue';
+import ziggy from 'ziggy-js';
 
 /** Get head manager instance (For Composition api) */
 export function useHeadManager(): InertiaHeadManager {
@@ -14,7 +15,6 @@ export function useHeadManager(): InertiaHeadManager {
   if (!instance) {
     throw new Error(`Should be used in setup().`);
   }
-  // @ts-ignore
   return instance.proxy.$headManager;
 }
 
@@ -25,7 +25,6 @@ export function usePage(): Page<any> {
   if (!instance) {
     throw new Error(`Should be used in setup().`);
   }
-  // @ts-ignore
   return instance.proxy.$page;
 }
 
@@ -36,18 +35,18 @@ export function useInertia(): Router & InertiaFormTrait {
   if (!instance) {
     throw new Error(`Should be used in setup().`);
   }
-  // @ts-ignore
   return instance.proxy.$inertia;
 }
 
 /** Get route instance (For Composition api) */
-export function route(...args) {
+export function route(...args): string {
   /** Get Instance */
   const instance = getCurrentInstance();
 
   if (!instance) {
+    // if not instance get ziggy directly
     // @ts-ignore
-    return window.route(args);
+    return ziggy(args);
     // throw new Error(`Should be used in setup().`);
   }
 

@@ -35,8 +35,11 @@
 import { defineComponent } from '@vue/composition-api';
 
 export default defineComponent({
+  /** Props Definition */
   props: {
+    /** Block Name */
     name: { type: String, default: undefined },
+    /** Block description */
     description: { type: String, default: undefined },
   },
 });

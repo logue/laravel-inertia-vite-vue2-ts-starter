@@ -10,7 +10,9 @@
 import { defineComponent } from '@vue/composition-api';
 
 export default defineComponent({
+  /** Props Definition */
   props: {
+    /** Message */
     messages: { type: String, default: undefined },
   },
 });

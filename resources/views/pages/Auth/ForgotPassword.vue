@@ -41,17 +41,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent, Ref, ref } from '@vue/composition-api';
+import { useInertia, route } from '@/views/plugins/inertia-helper';
 
 import BreezeButton from '@/views/components/Button.vue';
 import BreezeGuestLayout from '@/views/layouts/Guest.vue';
 import BreezeInput from '@/views/components/Input.vue';
 import BreezeLabel from '@/views/components/Label.vue';
 import BreezeValidationErrors from '@/views/components/ValidationErrors.vue';
-import { Head as InertiaHead, type InertiaForm } from '@inertiajs/inertia-vue';
-import { useInertia, route } from '@/views/plugins/inertia-helper';
+import { Head as InertiaHead } from '@inertiajs/inertia-vue';
 
 export default defineComponent({
+  /** Using Components */
   components: {
     BreezeButton,
     BreezeGuestLayout,
@@ -60,19 +61,26 @@ export default defineComponent({
     BreezeValidationErrors,
     InertiaHead,
   },
+  /** Props Definition */
   props: {
+    /** Status Message */
     status: { type: String, default: undefined },
   },
+  /**
+   * Setup
+   */
   setup() {
     /** Get Inertia instance */
     const inertia = useInertia();
 
-    const form: InertiaForm<{ email: string }> = inertia.form({
+    /** Form */
+    const form: Ref<{ email: string; processing?: boolean }> = ref({
       email: '',
     });
 
+    /** Submit button clicked */
     const submit = () => {
-      form.post(route('password.email'));
+      inertia.post(route('password.email'), form.value);
     };
 
     return {

@@ -9,7 +9,9 @@
 import { defineComponent } from '@vue/composition-api';
 
 export default defineComponent({
+  /** Props Definition */
   props: {
+    /** Lavel text */
     value: { type: String, default: undefined },
   },
 });

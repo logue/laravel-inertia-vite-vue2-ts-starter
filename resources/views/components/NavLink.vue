@@ -13,14 +13,23 @@ import {
 import { Link as InertiaLink } from '@inertiajs/inertia-vue';
 
 export default defineComponent({
+  /** Using Components */
   components: {
     InertiaLink,
   },
+  /** Props Definition */
   props: {
-    href: { type: String, default: undefined },
+    /** URL */
+    href: { type: String, required: true },
+    /** is active */
     active: { type: Boolean, default: false },
   },
+  /**
+   * Setup
+   * @param props - Props
+   */
   setup(props) {
+    /** Toggle active class */
     const classes: ComputedRef<string> = computed(() =>
       props.active
         ? 'inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition  duration-150 ease-in-out'

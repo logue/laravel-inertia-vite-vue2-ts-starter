@@ -63,7 +63,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent, Ref, ref } from '@vue/composition-api';
+import { useInertia, route } from '@/views/plugins/inertia-helper';
 
 import BreezeButton from '@/views/components/Button.vue';
 import BreezeCheckbox from '@/views/components/Checkbox.vue';
@@ -74,11 +75,10 @@ import BreezeValidationErrors from '@/views/components/ValidationErrors.vue';
 import {
   Head as InertiaHead,
   Link as InertiaLink,
-  type InertiaForm,
 } from '@inertiajs/inertia-vue';
-import { useInertia, route } from '@/views/plugins/inertia-helper';
 
 export default defineComponent({
+  /** Using Components */
   components: {
     BreezeButton,
     BreezeCheckbox,
@@ -89,27 +89,37 @@ export default defineComponent({
     InertiaHead,
     InertiaLink,
   },
+  /** Props Definition */
   props: {
-    canResetPassword: Boolean,
-    status: String,
+    /** Reset password flag */
+    canResetPassword: { type: Boolean, default: false },
+    /** Status message */
+    status: { type: String, default: undefined },
   },
+  /**
+   * Setup
+   */
   setup() {
     /** Get Inertia instance */
     const inertia = useInertia();
 
-    const form: InertiaForm<{
+    /** Form value */
+    const form: Ref<{
       email: string;
       password: string;
       remember: boolean;
-    }> = inertia.form({
+      processing?: boolean;
+    }> = ref({
       email: '',
       password: '',
       remember: false,
     });
 
+    /** Form submit handler */
     const submit = () => {
-      form.post(route('login'), {
-        onFinish: () => form.reset('password'),
+      console.log(form.value);
+      inertia.post(route('login'), form.value, {
+        onFinish: () => (form.value.password = ''),
       });
     };
 

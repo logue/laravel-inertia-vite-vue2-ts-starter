@@ -12,6 +12,7 @@ import {
   defineComponent,
   onMounted,
   ref,
+  type SetupContext,
   type Ref,
 } from '@vue/composition-api';
 
@@ -25,7 +26,7 @@ export default defineComponent({
   props: {
     modelValue: {
       type: String,
-      default: 'text',
+      default: undefined,
     },
   },
   /** Emits */
@@ -36,7 +37,7 @@ export default defineComponent({
    * @param _props  - Props
    * @param context - Context
    */
-  setup(_props, context) {
+  setup(_props, context: SetupContext) {
     const input: Ref<HTMLInputElement | undefined> = ref();
 
     onMounted(() => {

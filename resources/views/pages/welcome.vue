@@ -290,20 +290,28 @@ import {
 } from '@inertiajs/inertia-vue';
 
 export default defineComponent({
+  /** Using components */
   components: {
     InertiaHead,
     InertiaLink,
   },
+  /** Props Definition */
   props: {
-    canLogin: { type: Boolean, default: undefined },
+    /** Login function */
+    canLogin: { type: Boolean, default: false },
+    /** User register function */
     canRegister: { type: Boolean, default: false },
+    /** Laravel Version */
     laravelVersion: { type: String, default: undefined },
+    /** PHP Version */
     phpVersion: { type: String, default: undefined },
   },
+  /**
+   * Setup
+   */
   setup() {
+    /** Get inartia page instance */
     const page = usePage();
-
-    // const inertia = useInertia();
 
     return {
       page,

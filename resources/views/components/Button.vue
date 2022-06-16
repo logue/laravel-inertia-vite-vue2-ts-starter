@@ -8,12 +8,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent, type PropType } from '@vue/composition-api';
 
 export default defineComponent({
+  /** Props Definition */
   props: {
+    /** Button type */
     type: {
-      type: String,
+      type: String as PropType<'submit' | 'reset' | 'button'>,
       default: 'submit',
     },
   },

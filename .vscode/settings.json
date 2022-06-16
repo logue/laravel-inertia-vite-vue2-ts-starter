@@ -1,0 +1,30 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "stylelint.validate": [
+    "css",
+    "less",
+    "postcss",
+    "vue"
+  ],
+  "volar.icon.preview": true,
+  "phpsab.autoRulesetSearch": false,
+  "phpsab.standard": "./phpcs.xml",
+  "phpsab.executablePathCS": "./vendor/bin/phpcs",
+  "phpsab.executablePathCBF": "./vendor/bin/phpcbf",
+  "phpsab.snifferMode": "onSave",
+  "[xml]": {
+    "editor.defaultFormatter": "DotJoshJohnson.xml"
+  },
+  "[php]": {
+    "editor.defaultFormatter": "valeryanm.vscode-phpsab"
+  },
+  "[js,ts,json,md,html,vue,yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css,scss,sass]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+}

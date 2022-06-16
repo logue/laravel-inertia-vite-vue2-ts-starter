@@ -76,6 +76,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, type Ref } from '@vue/composition-api';
+import { useInertia, route } from '@/views/plugins/inertia-helper';
 
 import BreezeButton from '@/views/components/Button.vue';
 import BreezeGuestLayout from '@/views/layouts/Guest.vue';
@@ -86,9 +87,9 @@ import {
   Head as InertiaHead,
   Link as InertiaLink,
 } from '@inertiajs/inertia-vue';
-import { useInertia, route } from '@/views/plugins/inertia-helper';
 
 export default defineComponent({
+  /** Using Components */
   components: {
     BreezeButton,
     BreezeGuestLayout,
@@ -98,13 +99,19 @@ export default defineComponent({
     InertiaHead,
     InertiaLink,
   },
+  /** Props Definition */
   props: {
+    /** Status Message */
     status: { type: String, default: undefined },
   },
+  /**
+   * Setup
+   */
   setup() {
     /** Get Inertia instance */
     const inertia = useInertia();
 
+    /** Form value */
     const form: Ref<{
       name: string;
       email: string;
@@ -120,6 +127,7 @@ export default defineComponent({
       terms: false,
     });
 
+    /** Form submit handler */
     const submit = () => {
       // console.log(form.value);
       inertia.post(route('register'), form.value, {

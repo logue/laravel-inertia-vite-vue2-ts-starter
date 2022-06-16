@@ -21,10 +21,10 @@
       <div class="mt-4">
         <breeze-label for="password" value="Password" />
         <breeze-input
+          v-model="form.password"
           id="password"
           type="password"
           class="mt-1 block w-full"
-          v-model="form.password"
           required
           autocomplete="new-password"
         />
@@ -33,10 +33,10 @@
       <div class="mt-4">
         <breeze-label for="password_confirmation" value="Confirm Password" />
         <breeze-input
+          v-model="form.password_confirmation"
           id="password_confirmation"
           type="password"
           class="mt-1 block w-full"
-          v-model="form.password_confirmation"
           required
           autocomplete="new-password"
         />
@@ -55,17 +55,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent, ref, type Ref } from '@vue/composition-api';
+import { useInertia, route } from '@/views/plugins/inertia-helper';
 
 import BreezeButton from '@/views/components/Button.vue';
 import BreezeGuestLayout from '@/views/layouts/Guest.vue';
 import BreezeInput from '@/views/components/Input.vue';
 import BreezeLabel from '@/views/components/Label.vue';
 import BreezeValidationErrors from '@/views/components/ValidationErrors.vue';
-import { Head as InertiaHead, type InertiaForm } from '@inertiajs/inertia-vue';
-import { useInertia, route } from '@/views/plugins/inertia-helper';
+import { Head as InertiaHead } from '@inertiajs/inertia-vue';
 
 export default defineComponent({
+  /** Using components */
   components: {
     BreezeButton,
     BreezeGuestLayout,
@@ -74,29 +75,42 @@ export default defineComponent({
     BreezeValidationErrors,
     InertiaHead,
   },
+  /** Props Definition */
   props: {
+    /** Email Address */
     email: { type: String, default: undefined },
+    /** Access token */
     token: { type: String, default: undefined },
   },
+  /**
+   * Setup
+   * @param props - Props
+   */
   setup(props) {
     /** Get Inertia instance */
     const inertia = useInertia();
 
-    const form: InertiaForm<{
+    /** Form value */
+    const form: Ref<{
       token: string;
       email: string;
       password: string;
       password_confirmation: string;
-    }> = inertia.form({
+      processing?: boolean;
+    }> = ref({
       token: props.token,
       email: props.email,
       password: '',
       password_confirmation: '',
     });
 
+    /** Submit button clicked */
     const submit = () => {
-      form.post(route('password.update'), {
-        onFinish: () => form.reset('password', 'password_confirmation'),
+      inertia.post(route('password.update'), form.value, {
+        onFinish: () => {
+          form.value.password = '';
+          form.value.password_confirmation = '';
+        },
       });
     };
 

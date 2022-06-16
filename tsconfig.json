@@ -11,7 +11,10 @@
     "importHelpers": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "lib": ["esnext", "dom"],
+    "lib": [
+      "esnext",
+      "dom"
+    ],
     "module": "esnext",
     "moduleResolution": "node",
     "newLine": "lf",
@@ -19,14 +22,20 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "paths": {
-      "@/*": ["./resources/*"]
+      "@/*": [
+        "./resources/*"
+      ]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
     "target": "esnext",
-    "types": ["vite/client", "node", "vue"],
+    "types": [
+      "vite/client",
+      "node",
+      "vue"
+    ],
     "useDefineForClassFields": true,
     "baseUrl": "."
   },
@@ -36,7 +45,10 @@
     "resources/**/*.tsx",
     "resources/**/*.vue"
   ],
-  "exclude": ["node_modules", "public/dist"],
+  "exclude": [
+    "node_modules",
+    "public/dist"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

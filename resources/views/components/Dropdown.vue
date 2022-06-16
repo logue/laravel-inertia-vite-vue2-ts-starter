@@ -45,6 +45,7 @@ import {
 } from '@vue/composition-api';
 
 export default defineComponent({
+  /** Props Definition */
   props: {
     align: { type: String, default: 'right' },
     width: { type: String, default: '48' },
@@ -53,6 +54,10 @@ export default defineComponent({
       default: () => ['py-1', 'bg-white'],
     },
   },
+  /**
+   * Setup
+   * @param props - Props
+   */
   setup(props) {
     const open: Ref<boolean> = ref(false);
 

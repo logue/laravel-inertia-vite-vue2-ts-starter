@@ -42,6 +42,8 @@
 import {
   computed,
   defineComponent,
+  ref,
+  type Ref,
   type ComputedRef,
 } from '@vue/composition-api';
 import { useInertia, route } from '@/views/plugins/inertia-helper';
@@ -52,31 +54,40 @@ import BreezeGuestLayout from '@/views/layouts/Guest.vue';
 import {
   Head as InertiaHead,
   Link as InertiaLink,
-  type InertiaForm,
 } from '@inertiajs/inertia-vue';
 
 export default defineComponent({
+  /** Using Components */
   components: {
     BreezeButton,
     BreezeGuestLayout,
     InertiaHead,
     InertiaLink,
   },
+  /** Props Definition */
   props: {
+    /** Status message */
     status: { type: String, default: undefined },
   },
+  /**
+   * Setup
+   * @param props - Props
+   */
   setup(props) {
     /** Get Inertia instance */
     const inertia = useInertia();
 
-    const form: InertiaForm<{}> = inertia.form({});
+    /** Form */
+    const form: Ref<{ processing?: boolean }> = ref({});
 
+    /** Verification email send flag */
     const verificationLinkSent: ComputedRef<boolean> = computed(
       () => props.status === 'verification-link-sent'
     );
 
+    /** Submit button handler */
     const submit = () => {
-      form.post(route('verification.send'));
+      inertia.post(route('verification.send'), form.value);
     };
 
     return {

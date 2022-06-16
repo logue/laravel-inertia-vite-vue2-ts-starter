@@ -52,11 +52,7 @@
                 </template>
 
                 <template #content>
-                  <breeze-dropdown-link
-                    :href="route('logout')"
-                    method="post"
-                    :is="'button'"
-                  >
+                  <breeze-dropdown-link :href="route('logout')" method="post">
                     Log Out
                   </breeze-dropdown-link>
                 </template>
@@ -131,11 +127,7 @@
           </div>
 
           <div class="mt-3 space-y-1">
-            <breeze-responsive-nav-link
-              :href="route('logout')"
-              method="post"
-              :is="'button'"
-            >
+            <breeze-responsive-nav-link :href="route('logout')" method="post">
               Log Out
             </breeze-responsive-nav-link>
           </div>
@@ -169,6 +161,7 @@ import { Link as InertiaLink } from '@inertiajs/inertia-vue';
 import { usePage } from '@/views/plugins/inertia-helper';
 
 export default defineComponent({
+  /** Using Components */
   components: {
     BreezeApplicationLogo,
     BreezeDropdown,
@@ -177,8 +170,14 @@ export default defineComponent({
     BreezeResponsiveNavLink,
     InertiaLink,
   },
+  /**
+   * Setup
+   */
   setup() {
+    /** Get inertia page instance */
     const page = usePage();
+
+    /** Navigation Dropdown visibility */
     const showingNavigationDropdown: Ref<boolean> = ref(false);
 
     return {

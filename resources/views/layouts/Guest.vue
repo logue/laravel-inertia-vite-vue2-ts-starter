@@ -23,6 +23,7 @@ import BreezeApplicationLogo from '@/views/components/ApplicationLogo.vue';
 import { Link as InertiaLink } from '@inertiajs/inertia-vue';
 
 export default defineComponent({
+  /** Using components */
   components: {
     BreezeApplicationLogo,
     InertiaLink,

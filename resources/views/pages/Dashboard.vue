@@ -26,6 +26,7 @@ import BreezeAuthenticatedLayout from '@/views/layouts/Authenticated.vue';
 import { Head as InertiaHead } from '@inertiajs/inertia-vue';
 
 export default defineComponent({
+  /** Using components */
   components: {
     BreezeAuthenticatedLayout,
     InertiaHead,
