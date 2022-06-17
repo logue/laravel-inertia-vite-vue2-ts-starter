@@ -47,7 +47,7 @@ import {
 export default defineComponent({
   /** Props Definition */
   props: {
-    align: { type: String, default: 'right' },
+    alignment: { type: String, default: 'right' },
     width: { type: String, default: '48' },
     contentClasses: {
       type: Array,
@@ -68,9 +68,9 @@ export default defineComponent({
     });
 
     const alignmentClasses: ComputedRef<string> = computed(() => {
-      if (props.align === 'left') {
+      if (props.alignment === 'left') {
         return 'origin-top-left left-0';
-      } else if (props.align === 'right') {
+      } else if (props.alignment === 'right') {
         return 'origin-top-right right-0';
       } else {
         return 'origin-top';

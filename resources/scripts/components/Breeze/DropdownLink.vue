@@ -10,9 +10,9 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
+import { useInertia } from '@/plugins/inertia-helper';
 
 import { Link as InertiaLink } from '@inertiajs/inertia-vue';
-import { useInertia } from '../plugins/inertia-helper';
 
 export default defineComponent({
   /** Components */

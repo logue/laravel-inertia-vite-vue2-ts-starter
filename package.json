@@ -36,13 +36,13 @@
     "@typescript-eslint/parser": "^5.28.0",
     "@vue/eslint-config-prettier": "^7.0.0",
     "autoprefixer": "^10.4.7",
-    "eslint": "^8.17.0",
+    "eslint": "^8.18.0",
     "eslint-config-google": "^0.14.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-import-resolver-typescript": "^2.7.1",
     "eslint-plugin-html": "^6.2.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsdoc": "^39.3.2",
+    "eslint-plugin-jsdoc": "^39.3.3",
     "eslint-plugin-tsdoc": "^0.2.16",
     "eslint-plugin-vue": "^9.1.1",
     "eslint-plugin-vuejs-accessibility": "^1.2.0",
@@ -59,13 +59,13 @@
     "stylelint-config-recommended-scss": "^6.0.0",
     "stylelint-config-recommended-vue": "^1.4.0",
     "stylelint-order": "^5.0.0",
-    "typescript": "^4.7.3",
+    "typescript": "^4.7.4",
     "vite": "^2.9.12",
     "vite-plugin-checker": "^0.4.6",
     "vite-plugin-laravel": "^0.2.0-beta.21",
     "vite-plugin-vue2": "^2.0.1",
     "vue-eslint-parser": "^9.0.2",
     "vue-template-compiler": "^2.6.14",
-    "vue-tsc": "^0.37.9"
+    "vue-tsc": "^0.38.1"
   }
 }

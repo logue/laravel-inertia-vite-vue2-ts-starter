@@ -1,3 +1,9 @@
+# Laravel9 + Laravel Breeze + Laravel Vite + Inertia + Vue2 Composition API
+
+The explanation is in preparation.
+
+Vue site based on [vite-vue2-ts-starter](https://github.com/logue/vite-vue2-ts-starter) without vue-property-decolaor.
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">

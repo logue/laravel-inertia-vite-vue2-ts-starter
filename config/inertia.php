@@ -1,6 +1,6 @@
 <?php
 return [
-    
+
     /*
     |--------------------------------------------------------------------------
     | Server Side Rendering
@@ -18,7 +18,7 @@ return [
         'enabled' => false,
         'url' => 'http://127.0.0.1:13714/render',
     ],
-    
+
     /*
     |--------------------------------------------------------------------------
     | Testing
@@ -33,7 +33,7 @@ return [
     'testing' => [
         'ensure_pages_exist' => true,
         'page_paths' => [
-            resource_path('views/pages'),
+            resource_path('scripts/pages'),
         ],
         'page_extensions' => [
             'js',

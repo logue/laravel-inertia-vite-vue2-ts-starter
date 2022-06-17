@@ -1,24 +1,11 @@
 <template>
   <breeze-guest-layout>
-    <inertia-head title="Register" />
+    <inertia-head title="Reset Password" />
 
     <breeze-validation-errors class="mb-4" />
 
     <form @submit.prevent="submit">
       <div>
-        <breeze-label for="name" value="Name" />
-        <breeze-input
-          id="name"
-          type="text"
-          class="mt-1 block w-full"
-          v-model="form.name"
-          required
-          autofocus
-          autocomplete="name"
-        />
-      </div>
-
-      <div class="mt-4">
         <breeze-label for="email" value="Email" />
         <breeze-input
           id="email"
@@ -26,6 +13,7 @@
           class="mt-1 block w-full"
           v-model="form.email"
           required
+          autofocus
           autocomplete="username"
         />
       </div>
@@ -33,10 +21,10 @@
       <div class="mt-4">
         <breeze-label for="password" value="Password" />
         <breeze-input
+          v-model="form.password"
           id="password"
           type="password"
           class="mt-1 block w-full"
-          v-model="form.password"
           required
           autocomplete="new-password"
         />
@@ -45,29 +33,21 @@
       <div class="mt-4">
         <breeze-label for="password_confirmation" value="Confirm Password" />
         <breeze-input
+          v-model="form.password_confirmation"
           id="password_confirmation"
           type="password"
           class="mt-1 block w-full"
-          v-model="form.password_confirmation"
           required
           autocomplete="new-password"
         />
       </div>
 
       <div class="flex items-center justify-end mt-4">
-        <inertia-link
-          :href="route('login')"
-          class="underline text-sm text-gray-600 hover:text-gray-900"
-        >
-          Already registered?
-        </inertia-link>
-
         <breeze-button
-          class="ml-4"
           :class="{ 'opacity-25': form.processing }"
           :disabled="form.processing"
         >
-          Register
+          Reset Password
         </breeze-button>
       </div>
     </form>
@@ -76,20 +56,17 @@
 
 <script lang="ts">
 import { defineComponent, ref, type Ref } from '@vue/composition-api';
-import { useInertia, route } from '@/views/plugins/inertia-helper';
+import { useInertia, route } from '@/plugins/inertia-helper';
 
-import BreezeButton from '@/views/components/Button.vue';
-import BreezeGuestLayout from '@/views/layouts/Guest.vue';
-import BreezeInput from '@/views/components/Input.vue';
-import BreezeLabel from '@/views/components/Label.vue';
-import BreezeValidationErrors from '@/views/components/ValidationErrors.vue';
-import {
-  Head as InertiaHead,
-  Link as InertiaLink,
-} from '@inertiajs/inertia-vue';
+import BreezeButton from '@/components/Breeze/Button.vue';
+import BreezeGuestLayout from '@/layouts/Breeze/Guest.vue';
+import BreezeInput from '@/components/Breeze/Input.vue';
+import BreezeLabel from '@/components/Breeze/Label.vue';
+import BreezeValidationErrors from '@/components/Breeze/ValidationErrors.vue';
+import { Head as InertiaHead } from '@inertiajs/inertia-vue';
 
 export default defineComponent({
-  /** Using Components */
+  /** Using components */
   components: {
     BreezeButton,
     BreezeGuestLayout,
@@ -97,40 +74,39 @@ export default defineComponent({
     BreezeLabel,
     BreezeValidationErrors,
     InertiaHead,
-    InertiaLink,
   },
   /** Props Definition */
   props: {
-    /** Status Message */
-    status: { type: String, default: undefined },
+    /** Email Address */
+    email: { type: String, default: undefined },
+    /** Access token */
+    token: { type: String, default: undefined },
   },
   /**
    * Setup
+   * @param props - Props
    */
-  setup() {
+  setup(props) {
     /** Get Inertia instance */
     const inertia = useInertia();
 
     /** Form value */
     const form: Ref<{
-      name: string;
+      token: string;
       email: string;
       password: string;
       password_confirmation: string;
-      terms: boolean;
       processing?: boolean;
     }> = ref({
-      name: '',
-      email: '',
+      token: props.token,
+      email: props.email,
       password: '',
       password_confirmation: '',
-      terms: false,
     });
 
-    /** Form submit handler */
+    /** Submit button clicked */
     const submit = () => {
-      // console.log(form.value);
-      inertia.post(route('register'), form.value, {
+      inertia.post(route('password.update'), form.value, {
         onFinish: () => {
           form.value.password = '';
           form.value.password_confirmation = '';

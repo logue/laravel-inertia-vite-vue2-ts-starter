@@ -42,13 +42,13 @@
 
 <script lang="ts">
 import { defineComponent, Ref, ref } from '@vue/composition-api';
-import { useInertia, route } from '@/views/plugins/inertia-helper';
+import { useInertia, route } from '@/plugins/inertia-helper';
 
-import BreezeButton from '@/views/components/Button.vue';
-import BreezeGuestLayout from '@/views/layouts/Guest.vue';
-import BreezeInput from '@/views/components/Input.vue';
-import BreezeLabel from '@/views/components/Label.vue';
-import BreezeValidationErrors from '@/views/components/ValidationErrors.vue';
+import BreezeButton from '@/components/Breeze/Button.vue';
+import BreezeGuestLayout from '@/layouts/Breeze/Guest.vue';
+import BreezeInput from '@/components/Breeze/Input.vue';
+import BreezeLabel from '@/components/Breeze/Label.vue';
+import BreezeValidationErrors from '@/components/Breeze/ValidationErrors.vue';
 import { Head as InertiaHead } from '@inertiajs/inertia-vue';
 
 export default defineComponent({

@@ -10,7 +10,7 @@ import {
   defineComponent,
   type ComputedRef,
 } from '@vue/composition-api';
-import { useInertia } from '@/views/plugins/inertia-helper';
+import { useInertia } from '@/plugins/inertia-helper';
 
 import { Link as InertiaLink } from '@inertiajs/inertia-vue';
 

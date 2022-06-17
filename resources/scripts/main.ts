@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueCompositionAPI, { createApp, h } from '@vue/composition-api';
 import { createInertiaApp } from '@inertiajs/inertia-vue';
-import { importPageComponent } from '@/scripts/vite/import-page-component';
+import { importPageComponent } from '@/vite/import-page-component';
 import { InertiaProgress } from '@inertiajs/progress';
 import { ZiggyVue } from 'ziggy-js/dist/vue';
 import ziggy from 'ziggy-js';
@@ -17,7 +17,7 @@ const appName =
 createInertiaApp({
   title: title => `${title} - ${appName}`,
   resolve: name =>
-    importPageComponent(name, import.meta.glob('../views/pages/**/*.vue')),
+    importPageComponent(name, import.meta.glob('./pages/**/*.vue')),
   setup({ el, app, props, plugin }) {
     /** Get data-page attribute */
     // @ts-ignore

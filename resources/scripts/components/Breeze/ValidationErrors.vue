@@ -14,7 +14,7 @@ import {
   defineComponent,
   type ComputedRef,
 } from '@vue/composition-api';
-import { usePage } from '@/views/plugins/inertia-helper';
+import { usePage } from '@/plugins/inertia-helper';
 
 export default defineComponent({
   /**

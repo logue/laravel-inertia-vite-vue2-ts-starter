@@ -37,16 +37,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent, ref, type Ref } from '@vue/composition-api';
+import { useInertia, route } from '@/plugins/inertia-helper';
 
-import BreezeButton from '@/views/components/Button.vue';
-import BreezeGuestLayout from '@/views/layouts/Guest.vue';
-import BreezeInput from '@/views/components/Input.vue';
-import BreezeLabel from '@/views/components/Label.vue';
-import BreezeValidationErrors from '@/views/components/ValidationErrors.vue';
+import BreezeButton from '@/components/Breeze/Button.vue';
+import BreezeGuestLayout from '@/layouts/Breeze/Guest.vue';
+import BreezeInput from '@/components/Breeze/Input.vue';
+import BreezeLabel from '@/components/Breeze/Label.vue';
+import BreezeValidationErrors from '@/components/Breeze/ValidationErrors.vue';
 import { Head as InertiaHead } from '@inertiajs/inertia-vue';
-
-import { useInertia, route } from '@/views/plugins/inertia-helper';
 
 export default defineComponent({
   /** Using Components */
@@ -65,13 +64,14 @@ export default defineComponent({
     /** Get Inertia instance */
     const inertia = useInertia();
 
-    const form = inertia.form({
+    /** Form */
+    const form: Ref<{ password: string; processing?: boolean }> = ref({
       password: '',
     });
 
     const submit = () => {
-      form.post(route('password.confirm'), {
-        onFinish: () => form.reset(),
+      inertia.post(route('password.confirm'), form.value, {
+        onFinish: () => (form.value.password = ''),
       });
     };
 

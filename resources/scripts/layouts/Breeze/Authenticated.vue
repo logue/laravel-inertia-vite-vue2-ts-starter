@@ -26,7 +26,7 @@
           <div class="hidden sm:flex sm:items-center sm:ml-6">
             <!-- Settings Dropdown -->
             <div class="ml-3 relative">
-              <breeze-dropdown align="right" width="48">
+              <breeze-dropdown alignment="right" width="48">
                 <template #trigger>
                   <span class="inline-flex rounded-md">
                     <button
@@ -151,14 +151,14 @@
 
 <script lang="ts">
 import { defineComponent, ref, type Ref } from '@vue/composition-api';
+import { usePage } from '@/plugins/inertia-helper';
 
-import BreezeApplicationLogo from '@/views/components/ApplicationLogo.vue';
-import BreezeDropdown from '@/views/components/Dropdown.vue';
-import BreezeDropdownLink from '@/views/components/DropdownLink.vue';
-import BreezeNavLink from '@/views/components/NavLink.vue';
-import BreezeResponsiveNavLink from '@/views/components/ResponsiveNavLink.vue';
+import BreezeApplicationLogo from '@/components/Breeze/ApplicationLogo.vue';
+import BreezeDropdown from '@/components/Breeze/Dropdown.vue';
+import BreezeDropdownLink from '@/components/Breeze/DropdownLink.vue';
+import BreezeNavLink from '@/components/Breeze/NavLink.vue';
+import BreezeResponsiveNavLink from '@/components/Breeze/ResponsiveNavLink.vue';
 import { Link as InertiaLink } from '@inertiajs/inertia-vue';
-import { usePage } from '@/views/plugins/inertia-helper';
 
 export default defineComponent({
   /** Using Components */
